@@ -1,0 +1,360 @@
+{% extends 'partials/base_index.html' %}
+{% block content %}
+<div class="w-full h-screen overflow-auto scroll-css flex justify-center">
+    <div class="max-w-11/12 mt-10 overflow-auto scroll-css">
+        <div class="mb-10">
+            <h1 class="text-3xl text-center font-bold">Tabela Exemplo</h1>
+        </div>
+        <!-- PESQUISA E EXPORTAR -->
+        <div class="space-x-2 flex items-end">
+            <!-- CAMPOS INPUT  -->
+            <!-- <div class="w-72">
+                <label for="" class="text-xs block pl-1 font-semibold">Cliente:</label>
+                <input type="text" class="border border-gray-200 px-3 py-1.5 rounded w-11/12 focus:outline-gray-400" placeholder="Pesquise por nome do cliente">
+            </div> -->
+
+            <!-- <div class="w-72">
+                <label for="" class="text-xs block pl-1 font-semibold">Cód SAP:</label>
+                <input type="text" class="border border-gray-200 px-3 py-1.5 rounded w-11/12 focus:outline-gray-400" placeholder="Pesquise pelo código SAP">
+            </div> -->
+
+            <!-- CAMPOS SELECT  -->
+            <div class="w-72">
+                <label for="" class="text-xs block pl-1 font-semibold">Selecione o Período:</label>
+                <div class="relative flex">
+                    <select name="" id="" class="border border-gray-200 px-3 py-1.5 rounded w-11/12 focus:outline-gray-400 appearance-none relative">
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="">Este Mês</option>
+                        <option value="">Últimos 30 Dias</option>
+                        <option value="">Mês Passado</option>
+                        <option value="">Últimos 6 Meses</option>
+                        <option value="">Este Ano</option>
+                        <option value="">Últimos 12 Meses</option>
+                        <option value="">Ano Passado</option>
+                    </select>
+                    <!-- Flecha do select  -->
+                    <div class="absolute right-8 top-1.5 ">
+                        <p><i class="fa-solid fa-chevron-down text-sm text-gray-600"></i></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAMPOS DE INTERVALO DE DATAS  -->
+            <!-- <div class="">
+                <div class="flex items-center space-x-2 mt-1">
+                    <div>
+                        <label for="" class="text-xs block pl-1 font-semibold">De:</label>
+                        <input type="date" class="border border-gray-200 px-3 py-1.5 rounded w-36 focus:outline-gray-400">
+                    </div>
+                    
+                    <div>
+                        <label for="" class="text-xs block pl-1 font-semibold">Até:</label>
+                        <input type="date" class="border border-gray-200 px-3 py-1.5 rounded w-36 focus:outline-gray-400">
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="">
+                <div class="w-72">
+                    <label for="" class="text-xs block pl-1 font-semibold">Fornecedores:</label>
+                    <div class="relative">
+                        <select name="" id="" class="border border-gray-200 px-3 py-1.5 rounded  focus:outline-gray-400 w-11/12 appearance-none">
+                            <option value="" selected disabled>Busque por fornecedor...</option>
+                            <option value="Chin Kou">Chin Kou</option>
+                        </select>
+                        <!-- Flecha do select  -->
+                        <div class="absolute right-8 top-1.5 ">
+                            <p><i class="fa-solid fa-chevron-down text-sm text-gray-600"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="bg-green-700 text-white font-semibold py-1.5 px-3 rounded cursor-pointer hover:bg-green-900 transition duration-300">
+                Exportar Excel
+            </button>
+        </div>
+        <!-- TABELA -->
+        <div class="">
+            <table class="mx-auto mt-1 shadow border">
+                <!-- COLUNAS  -->
+                <thead>
+                    <tr class="">
+                        <th class="p-3 border-2 border-gray-300 min-w-72">Nome Cliente</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Código</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Cidade</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">UF</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Contato</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Telefone</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-72">Nome Cliente</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Código</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Cidade</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">UF</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Contato</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Telefone</th>
+                    </tr>
+                </thead>
+                <!-- LINHAS  -->
+                <tbody>
+                    <tr class="bg-gray-200">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Rede Dor São Luiz S.A.
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C08566
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Brasília
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            DF
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Compras
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            61 3535-1325
+                        </th>
+                         <th class="border-2 border-gray-300 py-1 px-3">
+                            Rede Dor São Luiz S.A.
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C08566
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Brasília
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            DF
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Compras
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            61 3535-1325
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Serviço Social da Indústria - SESI
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C04324
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Santa Bárbara d'Oeste	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                        SP
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Maurício
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            19 3455-2088
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Serviço Social da Indústria - SESI
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C04324
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Santa Bárbara d'Oeste	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                        SP
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Maurício
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            19 3455-2088
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-200">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Dr. Consulta Centro Médico Ltda
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C09175	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Santo André
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            SP
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Contato
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                        11 98742-7882
+                        </th>
+                         <th class="border-2 border-gray-300 py-1 px-3">
+                            Dr. Consulta Centro Médico Ltda
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C09175	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Santo André
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            SP
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Contato
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                        11 98742-7882
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Inst Matern Assist a Infanc e Policlin de Barbacena
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C11569
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Barbacena
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                        MG
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Compras
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            32 3339-5656	
+                        </th>
+                         <th class="border-2 border-gray-300 py-1 px-3">
+                            Inst Matern Assist a Infanc e Policlin de Barbacena
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C11569
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Barbacena
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                        MG
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Compras
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            32 3339-5656	
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-200">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            SPDM - Associação Paulista para Desenvolvimento da Medicina
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C06752
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            São Paulo	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            SP
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Bionexo
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            11 3583-1894	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            SPDM - Associação Paulista para Desenvolvimento da Medicina
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C06752
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            São Paulo	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            SP
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Bionexo
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            11 3583-1894	
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Instituto Dr José Frota
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C03269
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Fortaleza	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                        CE
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            ADM/Financ	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            85 3255-5000	
+                        </th>
+                         <th class="border-2 border-gray-300 py-1 px-3">
+                            Instituto Dr José Frota
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            C03269
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Fortaleza	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                        CE
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            ADM/Financ	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            85 3255-5000	
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- PAGINAÇÃO -->
+            <div class="flex justify-start mt-3">
+                <div>
+                    <nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-xs">
+                        <a href="#" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 inset-ring inset-ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Previous</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
+                                <path d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" fill-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-current="page" class="relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">1</a>
+                        <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 inset-ring inset-ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</a>
+                        <a href="#" class="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 inset-ring inset-ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</a>
+                    
+                        <a href="#" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 inset-ring inset-ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Next</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
+                                <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

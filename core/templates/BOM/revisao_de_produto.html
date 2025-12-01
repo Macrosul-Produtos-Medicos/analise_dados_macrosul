@@ -1,0 +1,102 @@
+{% extends 'partials/base_index.html' %}
+{% block content %}
+<div class="w-full min-h-screen pb-50 flex justify-center">
+    <div class="w-11/12">
+        <div class="my-10">
+            <h1 class="text-3xl text-center font-bold">Cadastro da Revisão de Produto</h1>
+        </div>
+        <div class="flex w-full justify-center">
+            <div class="bg-gray-100 border border-gray-200 shadow rounded-lg p-3 pb-6 w-full max-w-3xl space-y-3">
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Selecione o Equipamento:</label>
+                            <select name="" id="" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500">
+                                <option value="Selecione" selected disabled>Selecione</option>
+                                <option value="I00056 - Eletrocardiógrafo CardioCare 2000">I00056 - Eletrocardiógrafo CardioCare 2000</option>
+                                <option value="I00058 - Eletrocardiógrafo CardioTouch 3000">I00058 - Eletrocardiógrafo CardioTouch 3000</option>
+                                <option value="I00260 - Monitor de Sinais Vitais BM5">I00260 - Monitor de Sinais Vitais BM5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">N° de Revisão:</label>
+                            <input type="text" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Revisão">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-full">
+                    <div class="w-[96%] mx-auto">
+                        <div class="w-full">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap"><span class="text-red-500">*</span> Existe Sequência no N° Serial do Equipamento:</label>
+                            <select name="" id="" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500">
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-[96%] mx-auto">
+                    <p class="text-lg font-semibold">Determine o intervalo do número de série:</p>
+                </div>
+
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Serial Inicial:</label>
+                            <input type="text" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500">
+                            <p class="text-xs text-gray-500">Preencher caso o número de série tenha uma sequência</p>
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Serial Final:</label>
+                            <input type="text" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500">
+                            <p class="text-xs text-gray-500">Preencher caso o número de série tenha uma sequência</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-[96%] mx-auto">
+                    <div class="w-full">
+                        <label for="" class="text-xs font-semibold whitespace-nowrap"> <span class="text-red-500">*</span> Status:</label>
+                        <select name="" id="" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500">
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="">Aberto</option>
+                            <option value="">Fechado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Data Inicial de Fabricação:</label>
+                            <input type="date" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Cidade">
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Data Final de Fabricação:</label>
+                            <input type="date" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Cidade">
+                            <p class="text-xs text-gray-500">Preencher se o produto já não é mais fabricado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-[96%] mx-auto">
+                    <label for="" class="text-xs font-semibold whitespace-nowrap">Observações:</label>
+                    <textarea name="" id="" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500"></textarea>
+                </div>
+
+                <div class="flex justify-center">
+                    <button class="bg-gray-600 text-white rounded w-10/12 py-1.5 text-center mt-3 cursor-pointer hover:bg-gray-800 transition duration-300">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

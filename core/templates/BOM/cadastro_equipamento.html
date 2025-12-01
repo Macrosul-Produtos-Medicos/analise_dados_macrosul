@@ -1,0 +1,63 @@
+{% extends 'partials/base_index.html' %}
+{% block content %}
+<div class="w-full min-h-screen pb-50 flex justify-center">
+    <div class="w-11/12">
+        <div class="my-10">
+            <h1 class="text-3xl text-center font-bold">Cadastro de Equipamentos</h1>
+        </div>
+        <div class="flex w-full justify-center">
+            <div class="bg-gray-100 border border-gray-200 shadow rounded-lg p-3 pb-6 w-full max-w-3xl space-y-3">
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Código SAP do Equipamento:</label>
+                            <input type="text" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Código SAP">
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Nome do Equipamento:</label>
+                            <input type="text" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Nome do Equipamento">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Código do Equipamento Pelo Fabricante:</label>
+                            <input type="text" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Código do Equipamento">
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Parceiro de Negócio:</label>
+                            <select name="" id="" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500">
+                                <option value="Selecione" selected disabled>Selecione</option>
+                                <option value="Sonca Products Ltd">Sonca Products Ltd</option>
+                                <option value="Chin Kou Medical Instrument Co. Ltd.">Chin Kou Medical Instrument Co. Ltd.</option>
+                                <option value="Pt. Sugih Instrumendo Abadi">Pt. Sugih Instrumendo Abadi</option>
+                                <option value="American Diagnostic Corporation">American Diagnostic Corporation</option>
+                                <option value="Zumax Medical Co. Ltd.">Zumax Medical Co. Ltd.</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-[96%] justify-center mx-auto">
+                    <div class="w-full">
+                        <div class="w-full mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Imagem do Equipamento:</label>
+                            <input type="file" class="border border-gray-200 w-full rounded bg-white flex focus:outline-gray-500 file:bg-gray-500 file:text-white file:font-semibold cursor-pointer file:p-2 text-sm text-gray-500">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <button class="bg-gray-600 text-white rounded w-10/12 py-1.5 text-center mt-3 cursor-pointer hover:bg-gray-800 transition duration-300">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

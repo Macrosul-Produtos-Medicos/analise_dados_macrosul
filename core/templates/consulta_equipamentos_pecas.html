@@ -1,0 +1,197 @@
+{% extends 'partials/base_index.html' %}
+{% block content %}
+<div class="w-full min-h-screen pb-50 flex justify-center">
+    <div class="w-11/12">
+        <div class="my-10">
+            <h1 class="text-3xl text-center font-bold">Consulta de Equipamento e Peças</h1>
+        </div>
+        <div class="flex w-full justify-center">
+            <div class="bg-gray-100 border border-gray-200 shadow rounded-lg p-3">
+                <div class="">
+                    <!-- FORMULÁRIO DE TIPO DE CONSULTA -->
+                    <div class="flex gap-3">
+                        <div class="w-1/2">
+                            <label for="tipoConsulta" class="text-xs text-gray-600">Tipo de Consulta:</label>
+                            <select name="tipoConsulta" id="tipoConsulta" class="border flex text-center border-gray-200 py-1.5 px-3 rounded focus:outline-gray-300 bg-white w-full">
+                                <option value="equipamentos">Consultar Equipamentos</option>
+                                <option value="pecas">Consultar Peças</option>
+                            </select>
+                        </div>
+                        <!-- CAMPOS DO FORMULÁRIO DE EQUIPAMENTO  -->
+                        <div id="formEquipamento" class="w-1/2">
+                            <label for="" class="text-xs text-gray-600">Código SAP do Equipamento:</label>
+                            <input type="text" name="" id="" class="border flex text-center border-gray-200 py-1.5 px-3 w-full rounded focus:outline-gray-300 bg-white">
+                        </div>
+                        <!-- CAMPOS DO FORMULÁRIO DE PEÇAS  -->
+                        <div class="formPeca hidden w-1/2">
+                            <label for="" class="text-xs text-gray-600">Código SAP da Peça:</label>
+                            <input type="text" name="" id="" class="border flex text-center border-gray-200 py-1.5 w-full px-3 rounded focus:outline-gray-300 bg-white">
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <div class="formPeca hidden w-1/2">
+                            <label for="" class="text-xs text-gray-600">Nome da Peça:</label>
+                            <input type="text" name="" id="" class="border flex text-center border-gray-200 py-1.5 w-full px-3 rounded focus:outline-gray-300 bg-white">
+                        </div>
+                        <div class="formPeca hidden w-1/2">
+                            <label for="" class="text-xs text-gray-600">Código do Fabricante:</label>
+                            <input type="text" name="" id="" class="border flex text-center border-gray-200 py-1.5 w-full px-3 rounded focus:outline-gray-300 bg-white">
+                        </div>
+                    </div>
+                </div>
+                <button class="bg-gray-600 text-white rounded w-full py-1.5 text-center mt-3 cursor-pointer hover:bg-gray-800 transition duration-300">Consultar</button>
+            </div>
+        </div>
+        <!-- TABELA -->
+        <div class="mt-14">
+            <table class="mx-auto mt-1 shadow border w-full">
+                <!-- COLUNAS  -->
+                <thead>
+                    <tr class="">
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Código do Item</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Nome do Item</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Código do Fabricante</th>
+                        <th class="p-3 border-2 border-gray-300 min-w-40">Imagem</th>
+                    </tr>
+                </thead>
+                <!-- LINHAS  -->
+                <tbody>
+                    <tr class="bg-gray-200">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            I00056
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                           Eletrocardiógrafo Bionet 12 canais CardioCare 2000
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            110101-040100
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/eletrocardiografo/cardiocare-2000/I04007/eletrocardiografo-bionet-12-canais-cardiocare-2000-317-793.png" alt="" class="size-18 mx-auto">
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                           I00058
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Eletrocardiógrafo Bionet 12 canais CardioTouch 3000
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            110116-020100
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/eletrocardiografo/cardiotouch3000/c123/cardiotouch-antigo-443-1349.png" alt="" class="size-18 mx-auto">
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-200">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            I03013
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                           Aspirador de Secreções MD Elétrico Portátil com Bateria DV-350
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            DV-350
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/aspirador-de-secrecoes/dv-350/I03013%20/aspirador-de-secrecoes-md-eletrico-portatil-com-bateria-dv-350-321-818.png" alt="" class="size-18 mx-auto">
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                           I03061
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Detector Fetal MD de Mesa Digital, Bateria Recarregável, Bivolt FD300D
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            FD-300D
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/doppler-fetal/fd300/I03061/fd-300d-262-634.png" alt="" class="size-18 mx-auto">
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-200">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            I04090
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                           Monitor de Sinais Vitais Bionet BM3
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            110350-020100
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/monitor-de-sinais-vitais/bm3/I04090/bm3-xpro-440-1346.png" alt="" class="size-18 mx-auto">
+                        </th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                           I04409
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            Monitor Automático de Pressão Arterial A&D Modelo TM-2657P
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            TM-2657P	
+                        </th>
+                        <th class="border-2 border-gray-300 py-1 px-3">
+                            <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/pressao-arterial/kiosk/I04409/monitor-automatico-de-pressao-arterial-kiosk-md-322-823.png" alt="" class="size-18 mx-auto">
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- PAGINAÇÃO -->
+            <div class="flex justify-start mt-3">
+                <div>
+                    <nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-xs">
+                        <a href="#" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 inset-ring inset-ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Previous</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
+                                <path d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" fill-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-current="page" class="relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">1</a>
+                        <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 inset-ring inset-ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</a>
+                        <a href="#" class="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 inset-ring inset-ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</a>
+                    
+                        <a href="#" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 inset-ring inset-ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Next</span>
+                            <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
+                                <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const tipoConsulta = document.querySelector('#tipoConsulta')
+    const formPeca = document.querySelectorAll('.formPeca')
+    const formEquipamento = document.querySelector('#formEquipamento')
+
+    tipoConsulta.addEventListener('change', function(){
+        if(tipoConsulta.value == 'pecas'){
+            formPeca.forEach((campo)=>{
+                campo.classList.remove('hidden')
+            })
+            formEquipamento.classList.add('hidden')
+        } else{
+            formPeca.forEach((campo)=>{
+                campo.classList.add('hidden')
+            })
+            formEquipamento.classList.remove('hidden')
+        }
+    })
+</script>
+{% endblock content %}

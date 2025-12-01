@@ -1,0 +1,281 @@
+{% extends 'partials/base_index.html' %}
+{% block content %}
+<div class="w-full min-h-screen pb-50 flex justify-center">
+    <div class="w-11/12">
+        <div>
+            <div class="w-full mt-3">
+                <!-- GRÁFICO DE NOTAS FISCAIS DE SAÍDA -->
+                <div class="w-8/12 lg:w-[30%] mx-auto">
+                    <canvas id="ticket-medio"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <div class="w-full flex justify-center items-center p-2 bg-gray-600 font-semibold rounded-t-2xl">
+                <p class="text-2xl text-white">TICKET MÉDIO</p>
+            </div>
+            <table class="table-auto w-full bg-gray-100 shadow-lg">
+                <thead>
+                    <tr class="">
+                        <th class="border border-gray-300 px-3 py-1.5">Tipo de Negócio</th>
+                        <th class="border border-gray-300 px-3 py-1.5">Mês Atual</th>
+                        <th class="border border-gray-300 px-3 py-1.5">Mês Anterior</th>
+                        <th class="border border-gray-300 px-3 py-1.5">Últimos 6 Meses</th>
+                        <th class="border border-gray-300 px-3 py-1.5">Últimos 12 Meses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-3 py-1.5">B2B</th>
+                        <th class="border border-gray-300 px-3 py-1.5">6562.49</th>
+                        <th class="border border-gray-300 px-3 py-1.5">6564.69</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7203.94</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7581.7</th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-3 py-1.5">B2C</th>
+                        <th class="border border-gray-300 px-3 py-1.5">5370.71</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7984.53</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7836.0</th>
+                        <th class="border border-gray-300 px-3 py-1.5">8463.37</th>
+                    </tr>
+
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-3 py-1.5">B2E</th>
+                        <th class="border border-gray-300 px-3 py-1.5">20647.58</th>
+                        <th class="border border-gray-300 px-3 py-1.5">11238.9</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7569.45</th>
+                        <th class="border border-gray-300 px-3 py-1.5">4707.32</th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-3 py-1.5">B2G</th>
+                        <th class="border border-gray-300 px-3 py-1.5">12074.12</th>
+                        <th class="border border-gray-300 px-3 py-1.5">6050.2</th>
+                        <th class="border border-gray-300 px-3 py-1.5">4822.48</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7185.89</th>
+                    </tr>
+
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-3 py-1.5">D2C</th>
+                        <th class="border border-gray-300 px-3 py-1.5">550.19</th>
+                        <th class="border border-gray-300 px-3 py-1.5">3476.49</th>
+                        <th class="border border-gray-300 px-3 py-1.5">2177.06</th>
+                        <th class="border border-gray-300 px-3 py-1.5">1296.46</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <div class="w-full mt-3">
+                <!-- GRÁFICO DE NOTAS FISCAIS DE SAÍDA -->
+                <div class="w-8/12 lg:w-[50%] mx-auto">
+                    <canvas id="itens-por-pedido"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <div class="w-full flex justify-center items-center p-2 bg-gray-600 font-semibold rounded-t-2xl">
+                <p class="text-2xl text-white">MÉDIA DA QTD. DE ITENS POR PEDIDO</p>
+            </div>
+            <table class="table-auto w-full bg-gray-100 shadow-lg">
+                <thead>
+                    <tr class="">
+                        <th class="border border-gray-300 px-3 py-1.5">Tipo de Negócio</th>
+                        <th class="border border-gray-300 px-3 py-1.5">Mês Atual</th>
+                        <th class="border border-gray-300 px-3 py-1.5">Mês Anterior</th>
+                        <th class="border border-gray-300 px-3 py-1.5">Últimos 6 Meses</th>
+                        <th class="border border-gray-300 px-3 py-1.5">Últimos 12 Meses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-3 py-1.5">B2B</th>
+                        <th class="border border-gray-300 px-3 py-1.5">6562.49</th>
+                        <th class="border border-gray-300 px-3 py-1.5">6564.69</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7203.94</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7581.7</th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-3 py-1.5">B2C</th>
+                        <th class="border border-gray-300 px-3 py-1.5">5370.71</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7984.53</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7836.0</th>
+                        <th class="border border-gray-300 px-3 py-1.5">8463.37</th>
+                    </tr>
+
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-3 py-1.5">B2E</th>
+                        <th class="border border-gray-300 px-3 py-1.5">20647.58</th>
+                        <th class="border border-gray-300 px-3 py-1.5">11238.9</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7569.45</th>
+                        <th class="border border-gray-300 px-3 py-1.5">4707.32</th>
+                    </tr>
+
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-3 py-1.5">B2G</th>
+                        <th class="border border-gray-300 px-3 py-1.5">12074.12</th>
+                        <th class="border border-gray-300 px-3 py-1.5">6050.2</th>
+                        <th class="border border-gray-300 px-3 py-1.5">4822.48</th>
+                        <th class="border border-gray-300 px-3 py-1.5">7185.89</th>
+                    </tr>
+
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-3 py-1.5">D2C</th>
+                        <th class="border border-gray-300 px-3 py-1.5">550.19</th>
+                        <th class="border border-gray-300 px-3 py-1.5">3476.49</th>
+                        <th class="border border-gray-300 px-3 py-1.5">2177.06</th>
+                        <th class="border border-gray-300 px-3 py-1.5">1296.46</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('ticket-medio').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['B2B', 'B2C', 'B2G', 'B2E', 'D2C'],
+            datasets: [{
+                label: 'valor em porcentagem',
+                data: [25.9, 28.9, 24.6, 16.1, 4.4],
+                backgroundColor: [
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)'
+                ],
+                borderColor: [
+                'rgb(54, 162, 235)',
+                'rgb(255, 99, 132)',
+                'rgb(255, 206, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(153, 102, 255)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Ticket Médio',
+                    font: {
+                        size: 40,
+                        weight: 'bold'
+                    },
+                    padding: 20
+                },
+                subtitle: {
+                    display: true,
+                    text: 'Ticket Médio Dos Últimos 12 Meses',
+                    font: { size: 14 },
+                    padding: { bottom: 20 },
+                    color: '#555'
+                },
+                legend: { position: 'bottom' },
+                tooltip: { callbacks: {
+                label: ctx => `${ctx.label}: ${ctx.parsed}%`
+                }}
+            }
+        }
+    });
+</script>
+
+<script>
+    const grfc = document.getElementById('itens-por-pedido').getContext('2d');
+    new Chart(grfc, {
+        type: 'line',
+        data: {
+        labels: [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+            'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+            'Novembro', 'Dezembro'
+        ],
+
+        datasets: [
+            {
+                label: 'B2B',
+                data: [3.21, 3.29, 3.55, 3.76, 3.43, 3.80, 3.56, 3.54, 3.45, 3.43, 3.19, 3.23],
+                borderColor: 'rgb(54, 162, 235)',
+                backgroundColor: 'rgba(54, 162, 235, 0.3)',
+                borderWidth: 3,
+                tension: 0.2
+            },
+            {
+                label: 'B2C',
+                data: [2.11, 2.12, 1.71, 1.89, 2.31, 2.14, 2.35, 2.16, 1.66, 1.98, 2.41, 2.23],
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                borderWidth: 3,
+                tension: 0.2
+            },
+            {
+                label: 'B2G',
+                data: [2.28, 2.00, 2.49, 2.33, 1.81, 1.90, 1.93, 1.32, 1.58, 1.32, 2.42, 2.55],
+                borderColor: 'rgb(255, 206, 86)',
+                backgroundColor: 'rgba(255, 206, 86, 0.3)',
+                borderWidth: 3,
+                tension: 0.2
+            },
+            {
+                label: 'B2E',
+                data: [1.67, 6.33, 1.00, 1.00, 1.00, 4.33, 2.00, 1.00, 1.00, 2.00, 9.33, 10.5],
+                backgroundColor: 'rgba(75, 192, 75, 0.3)',
+                borderColor: 'rgb(75, 192, 75)',
+                borderWidth: 3,
+                tension: 0.2
+            },
+            {
+                label: 'D2C',
+                data: [1.43, 1.33, 1.16, 1.47, 1.33, 1.14, 2.43, 1.00, 1.43, 1.00, 1.42, 1.62],
+                borderColor: 'rgb(153, 102, 255)',
+                backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                borderWidth: 3,
+                tension: 0.2
+            }
+        ]},
+
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Quantidade de Itens por Pedido',
+                    font: { size: 30, weight: 'bold' },
+                    padding: 20
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y} itens`
+                    }
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Itens por pedido'
+                    }
+                },
+            }
+        }
+    });
+</script>
+{% endblock content %}

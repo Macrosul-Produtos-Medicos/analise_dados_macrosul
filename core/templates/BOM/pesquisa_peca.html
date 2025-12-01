@@ -1,0 +1,437 @@
+{% extends 'partials/base_index.html' %}
+{% block content %}
+<div class="w-full min-h-screen pb-50 overflow-x-hidden">
+    <div x-data="{resultadoPesquisa: false}" class="">
+        <div class="my-10">
+            <h1 class="text-3xl text-center font-bold">Pesquisa de Peças</h1>
+        </div>
+        <div class="flex w-full justify-center">
+            <div class="bg-gray-100 border border-gray-200 shadow rounded-lg p-3 pb-6 w-full max-w-3xl space-y-3">
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Cód SAP do Item:</label>
+                            <input type="text" name="" id="" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Ex: I01030">
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Cód FAB do Item:</label>
+                           <input type="text" name="" id="" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Ex: 110127-010100">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">Cód SAP do Fabricante:</label>
+                            <input type="text" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Ex: F01188">
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                            <label for="" class="text-xs font-semibold whitespace-nowrap">N° Serie ou Lote:</label>
+                            <input type="text" class="border border-gray-200 px-3 py-1.5 w-full rounded bg-white focus:outline-gray-500" placeholder="Ex: SP2105-00266">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto">
+                           <p class="text-xs text-gray-600"><span class="text-red-500">*</span> Para a pesquisas de um ou mais itens usar como separador a vírgula e sem espaço entre elas.</p>
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <div class="w-11/12 mx-auto flex items-center justify-end space-x-2 px-2">
+                            <input type="checkbox" class="border border-gray-200 rounded bg-white focus:outline-gray-500 cursor-pointer">  
+                            <label for="" class="text-xs font-semibold">
+                                Nota Fiscal ?
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center">
+                    <button @click="resultadoPesquisa = true" class="bg-gray-600 text-white rounded w-10/12 py-1.5 text-center mt-3 cursor-pointer hover:bg-gray-800 transition duration-300">Pesquisar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTADO DA PESQUISA  -->
+        <div x-show="resultadoPesquisa" x-transition class="w-11/12 mx-auto overflow-x-auto pb-5">
+            <div class="mt-20 mb-5">
+                <h1 class="text-3xl text-center font-bold">Resultado da Pesquisa de Peças:</h1>
+            </div>
+            <div class="flex w-full">
+                <div class="w-72">
+                    <label for="" class="text-xs block pl-1 font-semibold">Cód SAP Item:</label>
+                    <input type="text" class="border border-gray-200 px-3 py-1.5 rounded w-11/12 focus:outline-gray-400 bg-white" placeholder="Pesquise por cód SAP item">
+                </div>
+                <div class="w-72">
+                    <label for="" class="text-xs block pl-1 font-semibold">Cód FAB Item:</label>
+                    <input type="text" class="border border-gray-200 px-3 py-1.5 rounded w-11/12 focus:outline-gray-400 bg-white" placeholder="Pesquise pelo código FAB item">
+                </div> 
+            </div>
+            <!-- TABELA -->
+            <div class="">
+                <table class="mx-auto mt-1 shadow border w-full">
+                    <!-- COLUNAS  -->
+                    <thead>
+                        <tr class="bg-white">
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Nota Fiscal</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">N° Nota Fiscal</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Cód SAP Item</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">N° de Série</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-80">Nome Item</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-80">Descrição Inglês</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Cód FAB Item</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Cód FAB SAP</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Nome Fabricante</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Data do Documento</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Cód Cliente</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Nome Cliente</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">CPF/CNPJ</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Natureza Operação</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Versão Software</th>
+                            <th class="p-3 border-2 border-gray-300 min-w-40">Status</th>
+                        </tr>
+                    </thead>
+                    <!-- LINHAS  -->
+                    <tbody>
+                        <tr class="bg-gray-200">
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                I00056
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            Eletrocardiógrafo Bionet 12 canais CardioCare 2000	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                CardioCare 2000. EU-Cable.BR Multi
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                110101-040100
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                F01188
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Bionet Co. Ltd.
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Ativo
+                            </th>
+                        </tr>
+
+                        <tr class="bg-gray-100">
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                I00265
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            Suporte do Módulo de Capnografia Sidestream para Monitor - Bionet	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                bracket mounting lowFlo module
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                120108-055500
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                F01188
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Bionet Co. Ltd.
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Ativo
+                            </th>
+                        </tr>
+
+                        <tr class="bg-gray-200">
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                I00056
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            Eletrocardiógrafo Bionet 12 canais CardioCare 2000	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                CardioCare 2000. EU-Cable.BR Multi
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                110101-040100
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                F01188
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Bionet Co. Ltd.
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Ativo
+                            </th>
+                        </tr>
+
+                        <tr class="bg-gray-100">
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                I00265
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            Suporte do Módulo de Capnografia Sidestream para Monitor - Bionet	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                bracket mounting lowFlo module
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                120108-055500
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                F01188
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Bionet Co. Ltd.
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Ativo
+                            </th>
+                        </tr>
+
+                        <tr class="bg-gray-200">
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                I00056
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            Eletrocardiógrafo Bionet 12 canais CardioCare 2000	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                CardioCare 2000. EU-Cable.BR Multi
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                110101-040100
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                F01188
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Bionet Co. Ltd.
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Ativo
+                            </th>
+                        </tr>
+
+                        <tr class="bg-gray-100">
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                I00265
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            ------	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                            Suporte do Módulo de Capnografia Sidestream para Monitor - Bionet	
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                bracket mounting lowFlo module
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                120108-055500
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                F01188
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Bionet Co. Ltd.
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                ------
+                            </th>
+                            <th class="border-2 border-gray-300 py-1 px-3">
+                                Ativo
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- PAGINAÇÃO -->
+                <div class="flex justify-start mt-3">
+                    <div>
+                        <nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-xs">
+                            <a href="#" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 inset-ring inset-ring-gray-300 bg-white hover:bg-gray-200 focus:z-20 focus:outline-offset-0">
+                                <span class="sr-only">Previous</span>
+                                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
+                                    <path d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" fill-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <a href="#" aria-current="page" class="relative z-10 inline-flex items-center bg-blue-600 hover:bg-blue-800 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">1</a>
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 inset-ring inset-ring-gray-300 hover:bg-gray-200 focus:z-20 focus:outline-offset-0 bg-white">2</a>
+                            <a href="#" class="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 inset-ring inset-ring-gray-300 hover:bg-gray-200 focus:z-20 focus:outline-offset-0 bg-white md:inline-flex">3</a>
+                        
+                            <a href="#" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 inset-ring inset-ring-gray-300 bg-white hover:bg-gray-200 focus:z-20 focus:outline-offset-0">
+                                <span class="sr-only">Next</span>
+                                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
+                                    <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

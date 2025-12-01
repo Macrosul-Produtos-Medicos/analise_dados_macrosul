@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    <title>BOM</title>
+</head>
+<body>
+    <div class="w-full bg-gray-200 p-6 flex justify-center">
+        <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/logos/macrosul/logo-macrosul-azul/logo-macrosul-azul-366-943.png"alt="Logo Macrosul" class="w-38">
+    </div>
+
+    <main class="min-h-screen"> 
+        {% block content %}
+        {% endblock content %}
+    </main>
+       
+    <footer class="w-full bg-gray-200 border-gray-200 border-t px-10 py-10 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-gray-700">
+
+            <div class="flex flex-col items-center md:items-start">
+            <img src="https://s3.sa-east-1.amazonaws.com/macrosul.media/itens/logos/macrosul/logo-macrosul-azul/logo-macrosul-azul-366-943.png"
+                alt="Logo Macrosul" class="h-13 mb-2">
+            <p class="text-m text-gray-500">© 2025 Todos os Direitos reservados à 
+                <a href="https://www.macrosul.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Macrosul</a>
+            </p>
+            </div>
+            <div class="flex items-center space-x-8 text-blue-600 text-xl ml-10">
+                <a href="https://www.instagram.com/macrosul.oficial" target="_blank" rel="noopener noreferrer" title="instagram" class="hover:text-blue-700"><i class="fa-brands fa-instagram"></i></a>
+
+                <a href="https://www.facebook.com/macrosul" target="_blank" rel="noopener noreferrer" title="facebook" class="hover:text-blue-700"><i class="fa-brands fa-facebook"></i></a>
+
+                <a href="https://www.youtube.com/c/MacrosulProdutosMédicos" title="youtube" target="_blank" rel="noopener noreferrer" class="hover:text-blue-700"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
