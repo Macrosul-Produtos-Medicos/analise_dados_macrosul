@@ -25,7 +25,10 @@
                     <span>Filtros</span>
                 </button>
 
-                <button class="bg-green-700 text-white font-semibold py-2 px-3 rounded cursor-pointer hover:bg-green-900 transition duration-300">
+                <button 
+                    id="export-excel-btn" 
+                    type="button"
+                    class="bg-green-700 text-white font-semibold py-2 px-3 rounded cursor-pointer hover:bg-green-900 transition duration-300">
                     Exportar Excel
                 </button>
                 
@@ -382,5 +385,51 @@
         closeBtn.addEventListener('click', closeModal);
 
     });
+
+    const exportTableToCSV = () => {
+        const table = document.querySelector('table');
+        if (!table) {
+            console.error("Tabela não encontrada.");
+            return;
+        }
+
+        let csv = [];
+        
+        const rowsHead = table.querySelectorAll('thead tr');
+        rowsHead.forEach(row => {
+            let rowData = Array.from(row.querySelectorAll('th'))
+                               .map(th => `"${th.innerText.replace(/"/g, '""').trim()}"`)
+                               .join(';');
+            csv.push(rowData);
+        });
+
+        const rowsBody = table.querySelectorAll('tbody tr');
+        rowsBody.forEach(row => {
+            let rowData = Array.from(row.querySelectorAll('th'))
+                               .map(th => `"${th.innerText.replace(/"/g, '""').trim()}"`)
+                               .join(';');
+            csv.push(rowData);
+        });
+
+        const csvString = csv.join('\n');
+        
+        const BOM = '\uFEFF'; 
+        const blob = new Blob([BOM + csvString], { type: 'text/csv;charset=utf-8;' });
+
+        const a = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        
+        a.href = url;
+        a.setAttribute('download', 'TabelaExemplo.csv');
+        
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const exportBtn = document.getElementById('export-excel-btn');
+    exportBtn.addEventListener('click', exportTableToCSV);
+    
 </script>
 {% endblock content %}
