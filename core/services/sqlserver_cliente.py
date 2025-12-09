@@ -1,7 +1,8 @@
-from typing import Any, Dict, Iterable, List
 from contextlib import contextmanager
 import pyodbc
+from typing import Any, Dict, Iterable, List
 
+from .sqlserver_config import SQLServerConfig
 class SQLServerCliente:
     def __init__(self, config: Any):
         self.config = config
@@ -39,3 +40,5 @@ class SQLServerCliente:
             
             columns = [col[0] for col in cursor.description]
         return dict(zip(columns, row))
+    
+default_sql_server_client = SQLServerCliente(SQLServerConfig())
