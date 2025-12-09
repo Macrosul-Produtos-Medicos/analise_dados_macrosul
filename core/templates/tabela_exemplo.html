@@ -19,60 +19,68 @@
             </div> -->
 
             <!-- CAMPOS SELECT  -->
-            <div class="w-72">
-                <label for="" class="text-xs block pl-1 font-semibold">Selecione o Período:</label>
-                <div class="relative flex">
-                    <select name="" id="" class="border border-gray-200 px-3 py-1.5 rounded w-11/12 focus:outline-gray-400 appearance-none relative">
-                        <option value="" disabled selected>Selecione</option>
-                        <option value="">Este Mês</option>
-                        <option value="">Últimos 30 Dias</option>
-                        <option value="">Mês Passado</option>
-                        <option value="">Últimos 6 Meses</option>
-                        <option value="">Este Ano</option>
-                        <option value="">Últimos 12 Meses</option>
-                        <option value="">Ano Passado</option>
-                    </select>
-                    <!-- Flecha do select  -->
-                    <div class="absolute right-8 top-1.5 ">
-                        <p><i class="fa-solid fa-chevron-down text-sm text-gray-600"></i></p>
-                    </div>
-                </div>
-            </div>
+            <div class="flex items-end justify-start space-x-3 mb-4 relative">
+                <button id="open-filter-modal" class="bg-blue-600 text-white font-semibold py-2 px-3 rounded cursor-pointer hover:bg-blue-800 transition duration-300 flex items-center space-x-2">
+                    <i class="fa-solid fa-filter"></i>
+                    <span>Filtros</span>
+                </button>
 
-            <!-- CAMPOS DE INTERVALO DE DATAS  -->
-            <!-- <div class="">
-                <div class="flex items-center space-x-2 mt-1">
-                    <div>
-                        <label for="" class="text-xs block pl-1 font-semibold">De:</label>
-                        <input type="date" class="border border-gray-200 px-3 py-1.5 rounded w-36 focus:outline-gray-400">
-                    </div>
-                    
-                    <div>
-                        <label for="" class="text-xs block pl-1 font-semibold">Até:</label>
-                        <input type="date" class="border border-gray-200 px-3 py-1.5 rounded w-36 focus:outline-gray-400">
-                    </div>
-                </div>
-            </div> -->
+                <button 
+                    id="export-excel-btn" 
+                    type="button"
+                    class="bg-green-700 text-white font-semibold py-2 px-3 rounded cursor-pointer hover:bg-green-900 transition duration-300">
+                    Exportar Excel
+                </button>
+                
+                <div id="filter-modal" class="absolute top-full left-0 mt-2 z-40 hidden">
+                    <div class="bg-white rounded-lg shadow-xl w-72 p-4 border border-gray-200">
+                        
+                        <div class="flex justify-between items-center pb-3 mb-3 border-b">
+                            <h3 class="text-sm font-bold text-gray-900">Opções de Filtro</h3>
+                            <button id="close-modal-btn" type="button" class="text-gray-400 hover:text-gray-600">
+                                <i class="fa-solid fa-xmark text-sm"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            
+                            <div class="w-full">
+                                <label for="period-select" class="text-xs block pl-1 font-semibold">Selecione o Período:</label>
+                                <div class="relative flex">
+                                    <select name="period" id="period-select" class="border border-gray-200 text-sm px-3 py-1.5 rounded w-full focus:outline-gray-400 appearance-none">
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option value="ultimos-30-dias">Últimos 30 Dias</option>
+                                        <option value="ultimos-6-meses">Últimos 6 Meses</option>
+                                        <option value="ultimos-12-meses">Últimos 12 Meses</option>
+                                    </select>
+                                    <div class="absolute right-3 top-1.5 ">
+                                        <p><i class="fa-solid fa-chevron-down text-xs text-gray-600"></i></p>
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="">
-                <div class="w-72">
-                    <label for="" class="text-xs block pl-1 font-semibold">Fornecedores:</label>
-                    <div class="relative">
-                        <select name="" id="" class="border border-gray-200 px-3 py-1.5 rounded  focus:outline-gray-400 w-11/12 appearance-none">
-                            <option value="" selected disabled>Busque por fornecedor...</option>
-                            <option value="Chin Kou">Chin Kou</option>
-                        </select>
-                        <!-- Flecha do select  -->
-                        <div class="absolute right-8 top-1.5 ">
-                            <p><i class="fa-solid fa-chevron-down text-sm text-gray-600"></i></p>
+                            <div class="w-full">
+                                <label for="supplier-select" class="text-xs block pl-1 font-semibold">Fornecedores:</label>
+                                <div class="relative">
+                                    <select name="supplier" id="supplier-select" class="border border-gray-200 text-sm px-3 py-1.5 rounded focus:outline-gray-400 w-full appearance-none">
+                                        <option value="" selected disabled>Busque por fornecedor...</option>
+                                        <option value="chin-kou">Chin Kou</option>
+                                    </select>
+                                    <div class="absolute right-3 top-1.5 ">
+                                        <p><i class="fa-solid fa-chevron-down text-xs text-gray-600"></i></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 flex justify-end space-x-2 pt-3 border-t">
+                            <button type="button" class="py-1 px-3 text-xs bg-blue-600 border border-transparent rounded-md font-medium text-white shadow-sm hover:bg-blue-700">
+                                Aplicar
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <button class="bg-green-700 text-white font-semibold py-1.5 px-3 rounded cursor-pointer hover:bg-green-900 transition duration-300">
-                Exportar Excel
-            </button>
         </div>
         <!-- TABELA -->
         <div class="">
@@ -357,4 +365,71 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('filter-modal');
+        const openBtn = document.getElementById('open-filter-modal');
+        const closeBtn = document.getElementById('close-modal-btn');
+
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+
+    });
+
+    const exportTableToCSV = () => {
+        const table = document.querySelector('table');
+        if (!table) {
+            console.error("Tabela não encontrada.");
+            return;
+        }
+
+        let csv = [];
+        
+        const rowsHead = table.querySelectorAll('thead tr');
+        rowsHead.forEach(row => {
+            let rowData = Array.from(row.querySelectorAll('th'))
+                               .map(th => `"${th.innerText.replace(/"/g, '""').trim()}"`)
+                               .join(';');
+            csv.push(rowData);
+        });
+
+        const rowsBody = table.querySelectorAll('tbody tr');
+        rowsBody.forEach(row => {
+            let rowData = Array.from(row.querySelectorAll('th'))
+                               .map(th => `"${th.innerText.replace(/"/g, '""').trim()}"`)
+                               .join(';');
+            csv.push(rowData);
+        });
+
+        const csvString = csv.join('\n');
+        
+        const BOM = '\uFEFF'; 
+        const blob = new Blob([BOM + csvString], { type: 'text/csv;charset=utf-8;' });
+
+        const a = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        
+        a.href = url;
+        a.setAttribute('download', 'TabelaExemplo.csv');
+        
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const exportBtn = document.getElementById('export-excel-btn');
+    exportBtn.addEventListener('click', exportTableToCSV);
+    
+</script>
 {% endblock content %}
