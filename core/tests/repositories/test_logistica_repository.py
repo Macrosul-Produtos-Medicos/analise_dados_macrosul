@@ -1,0 +1,81 @@
+import pytest
+import pyodbc
+
+from core.repositories.logistica_repository import LogisticaRepository
+from core.repositories.exceptions import ConnectionError, QueryError, RepositoryError
+
+@pytest.fixture
+def logistica_repository():
+    return LogisticaRepository()
+
+@pytest.fixture
+def listar_transportadoras_mais_usadas_mock():
+    return [
+        {
+            "CardCode": "F00001",
+            "CardName": "Transportadora A",
+            "Total": 150,
+            "Mes": 1,
+            "Ano": 2024,
+        },
+        {
+            "CardCode": "F00002",
+            "CardName": "Transportadora B",
+            "Total": 120,
+            "Mes": 1,
+            "Ano": 2024,
+        },
+        {
+            "CardCode": "F00003",
+            "CardName": "Transportadora C",
+            "Total": 120,
+            "Mes": 1,
+            "Ano": 2025,
+        },
+        {
+            "CardCode": "F00004",
+            "CardName": "Transportadora D",
+            "Total": 120,
+            "Mes": 2,
+            "Ano": 2025,
+        },
+    ]
+
+@pytest.mark.django_db
+def test_logistica_repository_instantiation(logistica_repository):
+    repo = logistica_repository
+    assert repo is not None
+    assert isinstance(repo, LogisticaRepository)
+    assert repo.cliente is not None
+    
+@pytest.mark.django_db
+def test_listar_transportadoras_mais_usadas(logistica_repository, listar_transportadoras_mais_usadas_mock):
+    # Mock the cliente's fetch_all method
+    logistica_repository.cliente.fetch_all = lambda sql, params=None: listar_transportadoras_mais_usadas_mock
+    result, sql = logistica_repository.listar_transportadoras_mais_usadas()
+    assert result == listar_transportadoras_mais_usadas_mock
+    assert isinstance(result, list)
+    assert all(isinstance(item, dict) for item in result)
+    assert sql is not None
+    assert isinstance(sql, str)
+    
+@pytest.mark.django_db
+@pytest.mark.parametrize("exception, expected_exception", [
+    (pyodbc.InterfaceError, ConnectionError),
+    (pyodbc.OperationalError, ConnectionError),
+    (pyodbc.ProgrammingError, QueryError),
+    (pyodbc.DataError, QueryError),
+    (pyodbc.DatabaseError, RepositoryError),
+    (Exception, RepositoryError),
+])
+def test_listar_transportadoras_mais_usadas_exceptions(logistica_repository, exception, expected_exception):
+    def raise_exception(sql, params=None):
+        raise exception("Simulated database error")
+    
+    # Mock the cliente's fetch_all method to raise the specified exception
+    logistica_repository.cliente.fetch_all = raise_exception
+    
+    with pytest.raises(expected_exception):
+        logistica_repository.listar_transportadoras_mais_usadas()
+    
+    
