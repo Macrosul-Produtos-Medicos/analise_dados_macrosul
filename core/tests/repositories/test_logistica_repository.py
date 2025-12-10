@@ -77,5 +77,7 @@ def test_listar_transportadoras_mais_usadas_exceptions(logistica_repository, exc
     
     with pytest.raises(expected_exception):
         logistica_repository.listar_transportadoras_mais_usadas()
+
+
     
     
