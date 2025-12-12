@@ -25,6 +25,8 @@ def handle_db_errors(func):
         
         except pyodbc.DatabaseError as e:
             raise RepositoryError(f"Erro no banco de dados: {e}") from e
+        except ValueError as e:
+            raise QueryError(f"Erro de valor: {e}") from e
         except Exception as e:
             raise RepositoryError(f"Erro inesperado no repositório: {e}") from e
     
