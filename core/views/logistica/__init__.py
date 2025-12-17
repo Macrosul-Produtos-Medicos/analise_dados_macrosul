@@ -1,0 +1,1 @@
+from .listar_relacao_notas_view import ListarRelacaoNotasView
