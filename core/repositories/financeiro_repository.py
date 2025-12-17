@@ -27,7 +27,7 @@ class FinanceiroRepository:
             SELECT
                 INV1.ItemCode,
                 OITM.ItemName,
-                OCDR.U_Tipo_Negocios,
+                OCRD.U_Tipo_Negocios,
                 CAST(SUM(INV1.Quantity) AS int) as 'Quantidade',
                 ITM1.Price,
                 SUM(ITM1.Price * INV1.Quantity) AS 'PrecoMinimo',
@@ -37,7 +37,7 @@ class FinanceiroRepository:
             FROM OINV OINV
             INNER JOIN INV1 INV1 ON OINV.DocEntry = INV1.DocEntry
             INNER JOIN OITM OITM ON INV1.ItemCode = OITM.ItemCode
-            INNER JOIN OCRD OCDR ON OCDR.CardCode = OINV.CardCode
+            INNER JOIN OCRD OCRD ON OCRD.CardCode = OINV.CardCode
             INNER JOIN ITM1 ITM1 on ITM1.PriceList = 4 and OITM.ItemCode = ITM1.ItemCode
             WHERE
                 OINV.TaxDate BETWEEN @DataInicio AND @DataFim 
@@ -47,7 +47,7 @@ class FinanceiroRepository:
             GROUP BY 
                 INV1.ItemCode,
                 OITM.ItemName,
-                OCDR.U_Tipo_Negocios,
+                OCRD.U_Tipo_Negocios,
                 ITM1.Price
         
             UNION ALL
@@ -55,7 +55,7 @@ class FinanceiroRepository:
             SELECT
                 RIN1.ItemCode,
                 OITM.ItemName,
-                OCDR.U_Tipo_Negocios,
+                OCRD.U_Tipo_Negocios,
                 -CAST(SUM(RIN1.Quantity) AS int) as 'Quantidade',
                 ITM1.Price,
                 -SUM(ITM1.Price * RIN1.Quantity) AS 'PrecoMinimo',
