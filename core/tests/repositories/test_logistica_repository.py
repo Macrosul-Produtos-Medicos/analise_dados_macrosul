@@ -77,6 +77,33 @@ def test_listar_transportadoras_mais_usadas_exceptions(logistica_repository, exc
     
     with pytest.raises(expected_exception):
         logistica_repository.listar_transportadoras_mais_usadas()
+        
+@pytest.mark.django_db
+def test_listar_transportadoras_mais_usadas_primeiros_registros(logistica_repository, listar_transportadoras_mais_usadas_mock):
+    # Mock the cliente's fetch_all method
+    logistica_repository.cliente.fetch_all = lambda sql, params=None: listar_transportadoras_mais_usadas_mock
+    result, sql = logistica_repository.listar_transportadoras_mais_usadas(offset=0, fetch_next=2)
+    assert 'OFFSET 0 ROWS' in sql
+    assert 'FETCH NEXT 2 ROWS ONLY' in sql
+    
+@pytest.mark.django_db
+def test_listar_transportadoras_mais_usadas_offset_e_fetch(logistica_repository, listar_transportadoras_mais_usadas_mock):
+    # Mock the cliente's fetch_all method
+    logistica_repository.cliente.fetch_all = lambda sql, params=None: listar_transportadoras_mais_usadas_mock
+    offset = 2
+    fetch_next = 2
+    result, sql = logistica_repository.listar_transportadoras_mais_usadas(offset=offset, fetch_next=fetch_next)
+    assert f'OFFSET {offset} ROWS' in sql
+    assert f'FETCH NEXT {fetch_next} ROWS ONLY' in sql
+    
+@pytest.mark.django_db
+def test_listar_transportadoras_mais_usadas_sem_fetch_next(logistica_repository, listar_transportadoras_mais_usadas_mock):
+    # Mock the cliente's fetch_all method
+    logistica_repository.cliente.fetch_all = lambda sql, params=None: listar_transportadoras_mais_usadas_mock
+    offset = 5
+    result, sql = logistica_repository.listar_transportadoras_mais_usadas(offset=offset, fetch_next=None)
+    assert f'OFFSET {offset} ROWS' in sql
+    assert 'FETCH NEXT' not in sql
 
 
     

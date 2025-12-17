@@ -6,8 +6,8 @@ class LogisticaRepository:
         self.cliente = default_sql_server_client
     
     @handle_db_errors 
-    def listar_transportadoras_mais_usadas(self) -> tuple[list[dict], str]:
-        sql = """
+    def listar_transportadoras_mais_usadas(self, offset: int = 0, fetch_next: int = None) -> tuple[list[dict], str]:
+        sql = f"""
         SELECT
             T2.CardCode AS CardCode,
             T2.CardName AS CardName,
@@ -31,5 +31,11 @@ class LogisticaRepository:
             MONTH(T0.DocDate),
             YEAR(T0.DocDate)
         ORDER BY
-            CardName, Mes, Ano; """
+            CardName, Mes, Ano; 
+        OFFSET {offset} ROWS;
+        """
+        
+        if fetch_next is not None:
+            sql += f"FETCH NEXT {fetch_next} ROWS ONLY;"
+            
         return self.cliente.fetch_all(sql), sql
