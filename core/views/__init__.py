@@ -11,6 +11,6 @@ from .dashboard_views import (
 )
 
 # Logistica views
-from .logistica_views import (
+from .logistica import (
     ListarRelacaoNotasView,
 )

@@ -1,17 +1,30 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, tabela_exemplo, dashboard_estoque, consulta_equipamentos_pecas, ticket_medio, parceiro_de_negocio, cadastro_equipamento, revisao_de_produto, cadastro_de_pecas, pesquisa_peca
+from .views import (
+    IndexView,
+    TabelaExemploView,
+    DashboardEstoqueView,
+    ConsultaEquipamentosPecasView,
+    TicketMedioView,
+    ListarRelacaoNotasView,
+)
+
+
+logistica_patterns = [
+    path('', ListarRelacaoNotasView.as_view(), name="listar_relacao_notas"),
+]
 
 urlpatterns = [
-    path('', index, name="index"),
-    path('consulta_equipamentos_pecas', consulta_equipamentos_pecas, name="consulta_equipamentos_pecas"),
-    path('dashboard_estoque', dashboard_estoque, name="dashboard_estoque"),
-    path('tabela_exemplo', tabela_exemplo, name="tabela_exemplo"),
-    path('ticket_medio', ticket_medio, name="ticket_medio"),
+    path('', IndexView.as_view(), name="index"),
+    path('logistica/', include(logistica_patterns)),
+    path('consulta_equipamentos_pecas/', ConsultaEquipamentosPecasView.as_view(), name="consulta_equipamentos_pecas"),
+    path('dashboard_estoque/', DashboardEstoqueView.as_view(), name="dashboard_estoque"),
+    path('tabela_exemplo/', TabelaExemploView.as_view(), name="tabela_exemplo"),
+    path('ticket_medio/', TicketMedioView.as_view(), name="ticket_medio"),
 
-    path('parceiro_de_negocio', parceiro_de_negocio, name="parceiro_de_negocio"),
-    path('cadastro_equipamento', cadastro_equipamento, name="cadastro_equipamento"),
-    path('revisao_de_produto', revisao_de_produto, name="revisao_de_produto"),
-    path('cadastro_de_pecas', cadastro_de_pecas, name="cadastro_de_pecas"),
-    path('pesquisa_peca', pesquisa_peca, name="pesquisa_peca"),
+    # path('parceiro_de_negocio/', ParceiroDeNegocioView.as_view(), name="parceiro_de_negocio"),
+    # path('cadastro_equipamento/', CadastroEquipamentoView.as_view(), name="cadastro_equipamento"),
+    # path('revisao_de_produto/', RevisaoDeProdutoView.as_view(), name="revisao_de_produto"),
+    # path('cadastro_de_pecas/', CadastroDePecasView.as_view(), name="cadastro_de_pecas"),
+    # path('pesquisa_peca/', PesquisaPecaView.as_view(), name="pesquisa_peca"),
 ]
