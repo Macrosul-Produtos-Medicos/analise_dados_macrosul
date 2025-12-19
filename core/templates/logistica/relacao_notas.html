@@ -1,0 +1,73 @@
+{% extends 'partials/base_index.html' %}
+{% load static %}
+
+{% block title %}Relação de Notas{% endblock title %}
+{% block js %}
+<script src="{% static 'js/utils/export_excel.js' %}"></script>
+<script src="{% static 'js/logistica/relacao_notas.js' %}"></script>
+{% endblock js %}
+
+{% block content %}
+<div
+    x-data="RelacaoNotas"
+    class="w-full h-screen flex flex-col py-4 lg:py-8">
+    
+    <!-- TÍTULO -->
+    <div class="mb-4 lg:mb-8 px-4 lg:px-12">
+        <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 text-center">Relação de Notas</h1>
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6 px-4 lg:px-12">
+        <button 
+            id="export-excel-btn" 
+            type="button"
+            @click="exportToExcel()"
+            class="bg-green-600 text-white font-semibold py-1.5 lg:py-2 px-3 lg:px-4 rounded cursor-pointer hover:bg-green-700 transition duration-300 flex items-center gap-2 text-sm lg:text-base">
+            <i class="fa-solid fa-file-excel"></i>
+            <span>Exportar Excel</span>
+        </button>
+    </div>
+
+    <!-- TABELA COM SCROLL -->
+    <div class="flex-1 overflow-auto border border-gray-300 rounded-lg shadow mx-4 lg:mx-12">
+        <table class="min-w-full border-collapse">
+            <!-- CABEÇALHO FIXO -->
+            <thead class="sticky top-0 bg-gray-800 text-white z-10">
+                <tr>
+                    <template x-for="coluna in colunas" :key="coluna">
+                        <th 
+                            @click="sortBy(coluna)" 
+                            class="px-2 lg:px-4 py-2 lg:py-3 text-left text-xs lg:text-sm font-semibold whitespace-nowrap cursor-pointer hover:bg-gray-700 select-none border-r border-gray-600 last:border-r-0"
+                        >
+                            <div class="flex items-center gap-1 lg:gap-2">
+                                <span x-text="coluna"></span>
+                                <i 
+                                    class="fa-solid text-gray-400 text-xs"
+                                    :class="getSortIcon(coluna)"
+                                ></i>
+                            </div>
+                        </th>
+                    </template>
+                </tr>
+            </thead>
+            <!-- LINHAS -->
+            <tbody>
+                <template x-for="(nota, index) in notas" :key="nota.CardCode">
+                    <tr 
+                        :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-100'"
+                        class="hover:bg-blue-50 transition-colors"
+                    >
+                        <template x-for="coluna in colunas" :key="coluna">
+                            <td 
+                                class="px-2 lg:px-4 py-1.5 lg:py-2 border-b border-gray-200 whitespace-nowrap text-xs lg:text-sm"
+                                x-text="nota[coluna]"
+                            ></td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
