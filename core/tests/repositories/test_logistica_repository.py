@@ -106,5 +106,43 @@ def test_listar_transportadoras_mais_usadas_sem_fetch_next(logistica_repository,
     assert 'FETCH NEXT' not in sql
 
 
+# ===================== Testes contar_transportadoras =====================
+
+@pytest.mark.django_db
+def test_contar_transportadoras(logistica_repository):
+    """Test counting unique carriers."""
+    logistica_repository.cliente.fetch_one = lambda sql, params=None: {"Total": 42}
+    result, sql = logistica_repository.contar_transportadoras()
     
+    assert result == 42
+    assert isinstance(sql, str)
+    assert 'COUNT(DISTINCT' in sql
+    assert 'CardCode' in sql
+
+
+@pytest.mark.django_db
+def test_contar_transportadoras_empty_result(logistica_repository):
+    """Test counting when no carriers found."""
+    logistica_repository.cliente.fetch_one = lambda sql, params=None: None
+    result, sql = logistica_repository.contar_transportadoras()
     
+    assert result == 0
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize("exception, expected_exception", [
+    (pyodbc.InterfaceError, ConnectionError),
+    (pyodbc.OperationalError, ConnectionError),
+    (pyodbc.ProgrammingError, QueryError),
+    (pyodbc.DatabaseError, RepositoryError),
+    (Exception, RepositoryError),
+])
+def test_contar_transportadoras_exceptions(logistica_repository, exception, expected_exception):
+    """Test exception handling for contar_transportadoras."""
+    def raise_exception(sql, params=None):
+        raise exception("Simulated database error")
+    
+    logistica_repository.cliente.fetch_one = raise_exception
+    
+    with pytest.raises(expected_exception):
+        logistica_repository.contar_transportadoras()
