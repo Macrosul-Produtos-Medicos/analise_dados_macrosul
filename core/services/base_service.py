@@ -78,3 +78,45 @@ class BaseService:
         
         pivot_df.columns.name = None  # Remove the aggregation name
         return pivot_df
+
+    def replace_column_names_with_month_year(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+        """
+        Replace column names in the format 'Mes-Ano' with MonthName-Ano.
+        Ex: '1-2024' becomes 'JAN-2024'
+        
+        :param dataframe: DataFrame with columns to rename.
+        :return: DataFrame with renamed columns.
+        """
+        
+        month_map = {
+            '1': 'JAN',
+            '2': 'FEV',
+            '3': 'MAR',
+            '4': 'ABR',
+            '5': 'MAI',
+            '6': 'JUN',
+            '7': 'JUL',
+            '8': 'AGO',
+            '9': 'SET',
+            '10': 'OUT',
+            '11': 'NOV',
+            '12': 'DEZ',
+        }
+        
+        new_columns = []
+        for col in dataframe.columns:
+            if isinstance(col, str) and '-' in col:
+                parts = col.split('-')
+                if len(parts) == 2 and parts[0].isdigit() and parts[1].isdigit():
+                    month_num = parts[0]
+                    year = parts[1]
+                    month_name = month_map.get(month_num, month_num)
+                    new_col = f"{month_name}-{year}"
+                    new_columns.append(new_col)
+                else:
+                    new_columns.append(col)
+            else:
+                new_columns.append(col)
+        
+        dataframe.columns = new_columns
+        return dataframe
