@@ -20,5 +20,7 @@ class LogisticaService(BaseService):
             aggfunc="sum",
             fill_value=0
         )
+        dataframe['Total6Meses'] = dataframe.iloc[:, 2:].sum(axis=1)
+        dataframe = self.replace_column_names_with_month_year(dataframe)
         data = self.dataframe_to_list_dicts(dataframe)
         return data, sql
