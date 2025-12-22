@@ -7,8 +7,12 @@ from .views import (
     ConsultaEquipamentosPecasView,
     TicketMedioView,
     ListarRelacaoNotasView,
+    ListarRentabilidadeItensView
 )
 
+financeiro_patterns = [
+    path('rentabilidade-itens/', ListarRentabilidadeItensView.as_view(), name="rentabilidade_itens"),
+]
 
 logistica_patterns = [
     path('', ListarRelacaoNotasView.as_view(), name="listar_relacao_notas"),
@@ -17,6 +21,7 @@ logistica_patterns = [
 urlpatterns = [
     path('', IndexView.as_view(), name="index"),
     path('logistica/', include(logistica_patterns)),
+    path('financeiro/', include(financeiro_patterns)),
     path('consulta_equipamentos_pecas/', ConsultaEquipamentosPecasView.as_view(), name="consulta_equipamentos_pecas"),
     path('dashboard_estoque/', DashboardEstoqueView.as_view(), name="dashboard_estoque"),
     path('tabela_exemplo/', TabelaExemploView.as_view(), name="tabela_exemplo"),
