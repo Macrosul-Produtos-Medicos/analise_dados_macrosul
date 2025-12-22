@@ -1,0 +1,1 @@
+from .listar_rentabilidade_itens import ListarRentabilidadeItensView

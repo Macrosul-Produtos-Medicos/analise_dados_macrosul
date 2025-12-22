@@ -14,3 +14,8 @@ from .dashboard_views import (
 from .logistica import (
     ListarRelacaoNotasView,
 )
+
+# Financeiro views
+from .financeiro import (
+    ListarRentabilidadeItensView,
+)
