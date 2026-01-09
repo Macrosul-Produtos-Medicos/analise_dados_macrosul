@@ -1,0 +1,212 @@
+{% extends 'partials/base_index.html' %}
+{% load static %}
+
+{% block title %}Relação de Notas{% endblock title %}
+{% block js %}
+<script src="{% static 'js/utils/export_excel.js' %}"></script>
+<script src="{% static 'js/financeiro/rentabilidade_itens.js' %}"></script>
+{% endblock js %}
+
+{% block content %}
+<div
+    x-data="RentabilidadeItens"
+    class="w-full h-screen flex flex-col py-4 lg:py-8">
+    
+    <!-- TÍTULO -->
+    <div class="mb-4 lg:mb-8 px-4 lg:px-12">
+        <h1 class="text-2xl lg:text-3xl font-bold text-gray-800 text-center">Rentabilidade de Itens</h1>
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6 px-4 lg:px-12">
+        <button 
+            id="filter-btn" 
+            type="button"
+            @click="toggleFilters()"
+            class="bg-blue-600 text-white font-semibold py-1.5 lg:py-2 px-3 lg:px-4 rounded cursor-pointer hover:bg-blue-700 transition duration-300 flex items-center gap-2 text-sm lg:text-base">
+            <i class="fa-solid fa-filter"></i>
+            <span>Filtros</span>
+        </button>
+
+        <button 
+            id="export-excel-btn" 
+            type="button"
+            @click="exportToExcel()"
+            class="bg-green-600 text-white font-semibold py-1.5 lg:py-2 px-3 lg:px-4 rounded cursor-pointer hover:bg-green-700 transition duration-300 flex items-center gap-2 text-sm lg:text-base">
+            <i class="fa-solid fa-file-excel"></i>
+            <span>Exportar Excel</span>
+        </button>
+    </div>
+
+    <!-- PAINEL DE FILTROS -->
+    <div 
+        x-show="showFilters" 
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 -translate-y-2"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-2"
+        class="mb-4 lg:mb-6 px-4 lg:px-12"
+    >
+        <div class="bg-gray-100 border border-gray-300 rounded-lg p-4 lg:p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Adicione seus campos de filtro aqui -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Campo 1</label>
+                    <input 
+                        type="text" 
+                        x-model="filtros.campo1"
+                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Digite..."
+                    >
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Campo 2</label>
+                    <input 
+                        type="text" 
+                        x-model="filtros.campo2"
+                        class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Digite..."
+                    >
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+                <button 
+                    @click="limparFiltros()"
+                    class="bg-gray-500 text-white font-semibold py-1.5 px-4 rounded cursor-pointer hover:bg-gray-600 transition duration-300 text-sm">
+                    Limpar
+                </button>
+                <button 
+                    @click="aplicarFiltros()"
+                    class="bg-blue-600 text-white font-semibold py-1.5 px-4 rounded cursor-pointer hover:bg-blue-700 transition duration-300 text-sm">
+                    Aplicar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABELA COM SCROLL -->
+    <div class="flex-1 overflow-auto border border-gray-300 rounded-lg shadow mx-4 lg:mx-12">
+        <table class="min-w-full border-collapse">
+            <!-- CABEÇALHO FIXO -->
+            <thead class="sticky top-0 bg-gray-800 text-white z-10">
+                <tr>
+                    <template x-for="coluna in colunas" :key="coluna">
+                        <th 
+                            @click="sortBy(coluna)" 
+                            class="px-2 lg:px-4 py-2 lg:py-3 text-left text-xs lg:text-sm font-semibold whitespace-nowrap cursor-pointer hover:bg-gray-700 select-none border-r border-gray-600 last:border-r-0"
+                        >
+                            <div class="flex items-center gap-1 lg:gap-2">
+                                <span x-text="coluna"></span>
+                                <i 
+                                    class="fa-solid text-gray-400 text-xs"
+                                    :class="getSortIcon(coluna)"
+                                ></i>
+                            </div>
+                        </th>
+                    </template>
+                </tr>
+            </thead>
+            <!-- LINHAS -->
+            <tbody>
+                <template x-for="(nota, index) in notas" :key="nota.CardCode">
+                    <tr 
+                        :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-100'"
+                        class="hover:bg-blue-50 transition-colors"
+                    >
+                        <template x-for="coluna in colunas" :key="coluna">
+                            <td 
+                                class="px-2 lg:px-4 py-1.5 lg:py-2 border-b border-gray-200 whitespace-nowrap text-xs lg:text-sm"
+                                x-text="nota[coluna]"
+                            ></td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PAGINAÇÃO -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4 lg:mt-6 px-4 lg:px-12">
+        <!-- INFO DE REGISTROS -->
+        <div class="text-xs lg:text-sm text-gray-600">
+            <span>Mostrando </span>
+            <span class="font-semibold" x-text="((paginaAtual - 1) * itensPorPagina) + 1"></span>
+            <span> a </span>
+            <span class="font-semibold" x-text="Math.min(paginaAtual * itensPorPagina, totalRegistros)"></span>
+            <span> de </span>
+            <span class="font-semibold" x-text="totalRegistros"></span>
+            <span> registros</span>
+        </div>
+
+        <!-- CONTROLES DE PAGINAÇÃO -->
+        <div class="flex items-center gap-1 lg:gap-2">
+            <!-- Primeira página -->
+            <button 
+                @click="irParaPagina(1)"
+                :disabled="paginaAtual === 1"
+                :class="paginaAtual === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'"
+                class="p-1.5 lg:p-2 rounded border border-gray-300 bg-white transition-colors">
+                <i class="fa-solid fa-angles-left text-xs lg:text-sm"></i>
+            </button>
+
+            <!-- Página anterior -->
+            <button 
+                @click="irParaPagina(paginaAtual - 1)"
+                :disabled="paginaAtual === 1"
+                :class="paginaAtual === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'"
+                class="p-1.5 lg:p-2 rounded border border-gray-300 bg-white transition-colors">
+                <i class="fa-solid fa-angle-left text-xs lg:text-sm"></i>
+            </button>
+
+            <!-- Números de página -->
+            <template x-for="pagina in paginasVisiveis" :key="pagina">
+                <button 
+                    @click="pagina !== '...' && irParaPagina(pagina)"
+                    :disabled="pagina === '...'"
+                    :class="{
+                        'bg-blue-600 text-white border-blue-600': pagina === paginaAtual,
+                        'bg-white hover:bg-gray-200': pagina !== paginaAtual && pagina !== '...',
+                        'cursor-default': pagina === '...'
+                    }"
+                    class="min-w-[32px] lg:min-w-[40px] p-1.5 lg:p-2 rounded border border-gray-300 text-xs lg:text-sm font-medium transition-colors"
+                    x-text="pagina">
+                </button>
+            </template>
+
+            <!-- Próxima página -->
+            <button 
+                @click="irParaPagina(paginaAtual + 1)"
+                :disabled="paginaAtual === totalPaginas"
+                :class="paginaAtual === totalPaginas ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'"
+                class="p-1.5 lg:p-2 rounded border border-gray-300 bg-white transition-colors">
+                <i class="fa-solid fa-angle-right text-xs lg:text-sm"></i>
+            </button>
+
+            <!-- Última página -->
+            <button 
+                @click="irParaPagina(totalPaginas)"
+                :disabled="paginaAtual === totalPaginas"
+                :class="paginaAtual === totalPaginas ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'"
+                class="p-1.5 lg:p-2 rounded border border-gray-300 bg-white transition-colors">
+                <i class="fa-solid fa-angles-right text-xs lg:text-sm"></i>
+            </button>
+        </div>
+
+        <!-- ITENS POR PÁGINA -->
+        <div class="flex items-center gap-2 text-xs lg:text-sm">
+            <label class="text-gray-600">Itens por página:</label>
+            <select 
+                x-model="itensPorPagina"
+                @change="alterarItensPorPagina()"
+                class="border border-gray-300 rounded px-2 py-1 text-xs lg:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>
+{% endblock content %}
