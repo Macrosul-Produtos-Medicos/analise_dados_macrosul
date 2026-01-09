@@ -16,10 +16,8 @@ const RelacaoNotas = () => ({
             this.colunas.pop()
             this.colunas.splice(2, 0, 'Total6Meses');
         }
-        console.log(this.colunas);
         this.fetchNotas(offset=this.offset).then(data => {
-            this.notas = this.notas.concat(data);
-            console.log(this.notas);    
+            this.notas = this.notas.concat(data);   
         });
     },
 
